@@ -84,7 +84,7 @@ The script just writes `Hello` and the input parameter `who-to-greet` to the con
 
 ## Create a workflow to test the action
 
-The action is now ready to be used. To see it in action, we'll create a workflow that used it. Create a [new file](../../new/main?filename=(.github/workflows/test-action.yml) called `.github/workflows/test-action.yml`. Add the following content:
+The action is now ready to be used. To see it in action, we'll create a workflow that used it. Create a [new file](../../new/main?filename=.github/workflows/test-action.yml) called `.github/workflows/test-action.yml`. Add the following content:
 
 ```YAML
 name: Test Action
