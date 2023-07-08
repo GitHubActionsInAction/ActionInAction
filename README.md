@@ -13,7 +13,12 @@ The lab consists of the following parts:
 
 In this repository, under [Code](/), click on 'Use this template' and and select [Create new repository](../../generate).
 
+<img width="350" alt="CH 04_001" src="https://github.com/GitHubActionsInAction/ActionInAction/assets/5276337/b477028d-f939-454a-9f9b-1b326261e06f">
+
 Pick your GitHub username as the owner and enter `MyActionInAction` as the repository name. Make the repository public and click `Create repository from template`.
+
+<img width="600" alt="CH 04_002" src="https://github.com/GitHubActionsInAction/ActionInAction/assets/5276337/3f1a0b86-8b4d-4523-a2bd-d0e19054caac">
+
 
 ## Create the dockerfile for the action
 
