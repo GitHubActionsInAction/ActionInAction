@@ -8,6 +8,7 @@ The lab consists of the following parts:
 2. [Create the dockerfile for the action](#create-the-dockerfile-for-the-action)
 3. [Create the action.yml file](#create-the-actionyml-file)
 4. [Create the entrypoint.sh file](#create-the-entrypointsh-file)
+5. [Create a workflow to test the action](#create-a-workflow-to-test-the-action)
 
 ## Use the template to create a new repo
 
@@ -47,8 +48,8 @@ Commit the file.
 Create a [new file](../../new/main?filename=action.yml) called `action.yml`. Add the following content and replace the placeholder `{GitHub user name}` with your GitHub user name:
 
 ```YAML
-name: '{GitHub user name}'s Action in Action'
-description: 'Greet's someone and returns always 42.'
+name: "{GitHub user name}'s Action in Action"
+description: 'Greets someone and returns always 42.'
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
@@ -77,7 +78,31 @@ Create a [new file](../../new/main?filename=entrypoint.sh) called `entrypoint.sh
 
 echo "Hello $1"
 echo "answer=42" >> $GITHUB_OUTPUT
-
 ```
 
 The script just writes `Hello` and the input parameter `who-to-greet` to the console and sets the output parameter `answer` to 42.
+
+## Create a workflow to test the action
+
+The action is now ready to be used. To see it in action, we'll create a workflow that used it. Create a [new file](../../new/main?filename=(.github/workflows/test-action.yml) called `.github/workflows/test-action.yml`. Add the following content:
+
+```YAML
+name: Test Action
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo to use the action locally
+        uses: actions/checkout@v3.5.3
+        
+      - name: Run my own container action
+        id: action
+        uses: ./
+        with:
+          who-to-greet: '@wulfland'
+      
+      - name: Output the answer
+        run: echo "The answer is ${{ steps.action.outputs.answer }}"
+```
