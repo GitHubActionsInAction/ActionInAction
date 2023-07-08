@@ -1,5 +1,5 @@
-name: '@wulflands's Action in Action'
-description: 'Greet's someone and returns always 42.'
+name: "@wulfland's Action in Action"
+description: 'Greets someone and returns always 42.'
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
