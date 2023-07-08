@@ -11,13 +11,13 @@ The lab consists of the following parts:
 
 ## Use the template to create a new repo
 
-In this repository, under [Code](/), click on 'Use this template' and and select [Create new repository](/generate).
+In this repository, under [Code](/), click on 'Use this template' and and select [Create new repository](../../generate).
 
 Pick your GitHub username as the owner and enter `MyActionInAction` as the repository name. Make the repository public and click `Create repository from template`.
 
 ## Create the dockerfile for the action
 
-Create a [new file](new/main?filename=Dockerfile) called `Dockerfile``. Add the following content:
+Create a [new file](../../new/main?filename=Dockerfile) called `Dockerfile``. Add the following content:
 
 ```Docker
 # Container image that runs your code
@@ -39,7 +39,7 @@ Commit the file.
 
 ## Create the action.yml file
 
-Create a [new file](new/main?filename=action.yml) called `action.yml`. Add the following content and replace the placeholder `{GitHub user name}` with your GitHub user name:
+Create a [new file](../../new/main?filename=action.yml) called `action.yml`. Add the following content and replace the placeholder `{GitHub user name}` with your GitHub user name:
 
 ```YAML
 name: '{GitHub user name}'s Action in Action'
@@ -65,7 +65,7 @@ Commit the file.
 
 ## Create the entrypoint.sh file
 
-Create a [new file](new/main?filename=entrypoint.sh) called `entrypoint.sh`. Add the following content:
+Create a [new file](../../new/main?filename=entrypoint.sh) called `entrypoint.sh`. Add the following content:
 
 ```Bash
 #!/bin/sh -l
