@@ -1,6 +1,6 @@
 # Hands-on: a docker container action in action
 
-In this hands-on lab you will create a docker container action that uses input and output parameters. Furthermore, you will create a CI build that tests the action everytime y change is made to one of the files.
+In this hands-on lab you will create a docker container action that uses input and output parameters. Furthermore, you will create a CI build that tests the action every time y change is made to one of the files.
 
 The lab consists of the following parts:
 
@@ -12,7 +12,7 @@ The lab consists of the following parts:
 
 ## Use the template to create a new repo
 
-In this repository, under [Code](/), click on 'Use this template' and and select [Create new repository](../../generate).
+In this repository, under [Code](/), click on 'Use this template' and select [Create new repository](../../generate).
 
 <img width="350" alt="CH 04_001" src="https://github.com/GitHubActionsInAction/ActionInAction/assets/5276337/b477028d-f939-454a-9f9b-1b326261e06f">
 
@@ -39,16 +39,16 @@ RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 ```
 
-The dockerfile defines the docker container for the action. You could also use an existing image but we want to build everything from scratch. We use the latest alpine image and just copy a simple shell script into the container.
+The dockerfile defines the docker container for the action. You could also use an existing image, but we want to build everything from scratch. We use the latest alpine image and just copy a simple shell script into the container.
 
 Commit the file.
 
 ## Create the action.yml file
 
-Create a [new file](../../new/main?filename=action.yml) called `action.yml`. Add the following content and replace the placeholder `{GitHub user name}` with your GitHub user name:
+Create a [new file](../../new/main?filename=action.yml) called `action.yml`. Add the following content and replace the placeholder `{GitHub username}` with your GitHub user name:
 
 ```YAML
-name: "{GitHub user name}'s Action in Action"
+name: "{GitHub username}'s Action in Action"
 description: 'Greets someone and returns always 42.'
 inputs:
   who-to-greet:  # id of input
@@ -84,7 +84,7 @@ The script just writes `Hello` and the input parameter `who-to-greet` to the con
 
 ## Create a workflow to test the action
 
-The action is now ready to be used. To see it in action, we'll create a workflow that used it. Create a [new file](../../new/main?filename=.github/workflows/test-action.yml) called `.github/workflows/test-action.yml`. Add the following content:
+The action is now ready to be used. To see it in action, we'll create a workflow that uses it. Create a [new file](../../new/main?filename=.github/workflows/test-action.yml) called `.github/workflows/test-action.yml`. Add the following content:
 
 ```YAML
 name: Test Action
@@ -105,4 +105,14 @@ jobs:
       
       - name: Output the answer
         run: echo "The answer is ${{ steps.action.outputs.answer }}"
+      
+      - name: Test the container
+        if: ${{ steps.action.outputs.answer != 42 }}
+        run: |
+          echo "::error file=entrypoint.sh,line=4,title=Error in container::The answer was not expected"
+          exit 1
 ```
+
+The workflow will automatically run and execute the action. Inspect the output. You can see that the container was created and outputs th egreeting to the workflow log. The otput parameter can be access in subsequent steps.
+
+<img width="350" alt="CH 04_003" src="https://github.com/GitHubActionsInAction/ActionInAction/assets/5276337/e6d2cbc6-186b-4093-9f63-d6bc31bace75">
